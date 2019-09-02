@@ -1,0 +1,33 @@
+<div class="text-center" [@animacao-erro-login]="alertarErro ? 'criado' : 'void'">
+<form class="form-signin" [formGroup]="formulario" (ngSubmit)="autenticar()">
+  <img class="mb-4" src="assets/dragao-preto.jpg" alt="" width="72" height="72">
+  <h1 class="h3 mb-3 font-weight-normal">Faça Login</h1>
+  <div class="form-group">
+    <label for="inputEmail" class="sr-only">Email address</label>
+    <input 
+      type="email" 
+      id="inputEmail" 
+      class="form-control" 
+      placeholder="Digite seu e-mail" 
+      formControlName="email"
+      autofocus>  
+  </div>
+  <div class="form-group">  
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input 
+      type="password"
+      id="inputPassword"
+      class="form-control"
+      placeholder="Digite sua senha"
+      formControlName="senha"
+      >
+  </div>
+  
+  <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
+
+  <p class="small text-danger text-center" *ngIf="!formulario.get('email').valid && formulario.get('email').touched">Preecha o campo de e-mail corretamente</p>
+    <p class="small text-danger text-center" *ngIf="!formulario.get('senha').valid && formulario.get('senha').touched">Preecha o campo de senha corretamente. A senha deve ter no mínimo 6 caracteres</p>
+    <p class="small text-danger text-center" *ngIf="msgError">{{ msgError }}</p>
+  <p class="mt-5 mb-3 text-muted">&copy; 2017-2019</p>
+</form>
+</div>

@@ -1,0 +1,24 @@
+.mbot20 {
+    margin-bottom: 20px;
+}
+.background-grey {
+    background-color: #DDD;
+}
+
+.label-animate {
+    transition: 0.3s all ease-in-out;
+    transform: translate(12px, -31px) !important;
+}
+
+.label-normal {
+    transform: translate(1px, -61px) !important;
+    font-size: 14px;
+}
+
+.footer-main {
+    padding: 30px;
+}
+
+.pointer {
+    cursor: pointer;
+}

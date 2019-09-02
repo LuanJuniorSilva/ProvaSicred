@@ -1,0 +1,58 @@
+<div class="card" style="width: 20rem;">
+  <div class="card-body" [@animacao-erro-login]="alertarErro ? 'criado' : 'void'">
+    <div class="card-title"></div>
+    
+    <form [formGroup]="formulario" (ngSubmit)="cadastrarUsuario()">
+      <div class="form-group">
+        <input 
+          type="email" 
+          class="form-control" 
+          placeholder="E-mail"
+          formControlName="email"
+        >
+      </div>
+      <div class="form-group">
+        <input 
+          type="text"
+          class="form-control" 
+          placeholder="Nome completo"
+          formControlName="nome_completo"
+        >
+      </div>
+      <div class="form-group">
+        <input 
+          type="text"
+          class="form-control" 
+          placeholder="Nome de usuário"
+          formControlName="nome_usuario"
+        >
+      </div>
+      <div class="form-group">
+        <input 
+          type="password"
+          class="form-control" 
+          placeholder="Senha"
+          formControlName="senha"
+        >
+      </div>
+      <button type="submit" class="btn btn-primary btn-sm btn-block">Cadastre-se</button>
+      <p class="small text-danger text-center" *ngIf="!formulario.get('email').valid && formulario.get('email').touched">Preecha o campo de e-mail corretamente</p>
+      <p class="small text-danger text-center" *ngIf="!formulario.get('nome_completo').valid && formulario.get('nome_completo').touched">Preecha o campo nome completo corretamente.</p>
+      <p class="small text-danger text-center" *ngIf="!formulario.get('nome_usuario').valid && formulario.get('nome_usuario').touched">Preecha o campo nome de usuário corretamente.</p>
+      <p class="small text-danger text-center" *ngIf="!formulario.get('senha').valid && formulario.get('senha').touched">Preecha o campo de senha corretamente. A senha deve ter no mínimo 6 caracteres</p>
+      <p class="small text-danger text-center" *ngIf="msgError">{{ msgError }}</p>
+    </form>
+    <hr />
+
+    <p class="small text-center">Ao cadastrar-se, você concorda com nossos <b>Termos</b> e <b>Política de Privacidade</b>.</p>
+
+  </div>
+</div>
+<br />
+<div class="card" style="width: 20rem;">
+  <div class="card-body">
+    <p class="card-text">
+      Tem uma conta? <a href="#" (click)="exibirPainelLogin()" class="card-link">Faça login</a>
+    </p> 
+  </div>
+</div>
