@@ -14,9 +14,16 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
   	this.dragoes.listarDragoes().subscribe((resposta: any) => {
+      resposta.sort((a,b) => {
+        if(a.name > b.name) return 1;
+        if(a.name < b.name) return -1;
+
+        return 0;
+      });
+
       this.listaDragoes = resposta;
-      this.listaDragoes.sort((a: any, b: any) => a.name > b.name);
-    })
+
+    });
   }
 
   public sair(): void {
