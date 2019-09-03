@@ -1,6 +1,7 @@
 export class Dragoes {
-	public id: number;
-	public nome: string;
-	public tipo: string;
-	public dataCriacao: Date;
+	id: string;
+    createdAt: string;
+    name: string;
+    type: string;
+    histories: string[];
 }
