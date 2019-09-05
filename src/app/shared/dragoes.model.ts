@@ -1,7 +1,10 @@
 export class Dragoes {
-	id: string;
-    createdAt: string;
-    name: string;
-    type: string;
-    histories: string[];
+    constructor(
+        private id: string,
+        private createdAt: string,
+        private name: string,
+        private type: string,
+        private histories: string[],
+    ){}
+
 }

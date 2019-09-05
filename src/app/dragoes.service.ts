@@ -21,19 +21,27 @@ export class DragoesService {
 
 	public atualizarDragao(dragao: Dragoes, id: number): Observable<Dragoes>{
 
-		// let headers = new HttpHeaders({
-  //           'Content-Type': 'application/json'
-  //        });
+		let headers = new HttpHeaders({
+            'Content-Type': 'application/json'
+         });
 
-  //        let options = {
-  //           headers: headers
-  //        }
+         let options = {
+            headers: headers
+         }
 
-		return this.http.put<Dragoes>(`${URL_API}/${id}`, JSON.stringify(dragao));
+		return this.http.put<Dragoes>(`${URL_API}/${id}`, dragao, options);
 	}
 
 	public inserirDragao(dragao: Dragoes): Observable<Dragoes>{
-		return this.http.put<Dragoes>(URL_API, JSON.stringify(dragao));
+		let headers = new HttpHeaders({
+            'Content-Type': 'application/json'
+         });
+
+         let options = {
+            headers: headers
+		 }
+		 
+		return this.http.post<Dragoes>(URL_API, dragao, options);
 	}
 
 	public deletarItem(id: number): Observable<Dragoes>{
