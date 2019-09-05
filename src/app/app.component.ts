@@ -10,7 +10,7 @@ export class AppComponent implements OnInit {
   title = 'App Dragão';
 
   ngOnInit(): void {
-
+    //Configuração do firebase
     var firebaseConfig = {
 	    apiKey: "AIzaSyAVpmhns8F0-8qNUtRkq6A7eGJf3G5Iui4",
 	    authDomain: "provasicred.firebaseapp.com",
@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
 	    appId: "1:509580112017:web:4ff43e6ddb24bd82"
     };
 
-  
+   //Iniciando a conexão com o firebase
     firebase.initializeApp(firebaseConfig);
   }
 }

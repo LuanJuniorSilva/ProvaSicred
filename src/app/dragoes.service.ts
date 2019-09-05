@@ -12,12 +12,21 @@ export class DragoesService {
 
 	constructor(private http: HttpClient){}
 
+	/*
+	*  Metodo para listar todos os dragões
+	*/
+
 	public listarDragoes(): Observable<Dragoes[]> {
 		return this.http.get<Dragoes>(URL_API).pipe(
             retry(10),
             map((respota: any) => respota)
         );
 	}
+
+	/*
+	*  Metodo para alterar dragão
+	* Obs: Adicionado o headers para fazer a alteração
+	*/
 
 	public atualizarDragao(dragao: Dragoes, id: number): Observable<Dragoes>{
 
@@ -27,10 +36,15 @@ export class DragoesService {
 
          let options = {
             headers: headers
-         }
+         };
 
 		return this.http.put<Dragoes>(`${URL_API}/${id}`, dragao, options);
 	}
+
+	/*
+	*  Metodo para inserir dragão
+	* Obs: Adicionado o headers para fazer a inserção
+	*/
 
 	public inserirDragao(dragao: Dragoes): Observable<Dragoes>{
 		let headers = new HttpHeaders({
@@ -39,11 +53,14 @@ export class DragoesService {
 
          let options = {
             headers: headers
-		 }
+		 };
 		 
 		return this.http.post<Dragoes>(URL_API, dragao, options);
 	}
 
+	/*
+	*  Metodo para excluir o dragão
+	*/
 	public deletarItem(id: number): Observable<Dragoes>{
 		return this.http.delete<Dragoes>(`${URL_API}/${id}`);
 	}

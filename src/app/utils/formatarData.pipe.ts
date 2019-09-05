@@ -10,9 +10,9 @@ export class FormatarData implements PipeTransform {
 		let novaData: any;
 		let num: any = /[^0-9]/;
 
-		if(!num.test(data)){
+		if(!num.test(data)){//Se a data vir de tipo TimeStamp irá converter em números inteiros
 			novaData = parseInt(data)
-		}else{
+		}else{//Caso venha de tipo string normal não fazer nada, pois vai ser manipulado pelo moment
 			novaData = data;
 		}
 

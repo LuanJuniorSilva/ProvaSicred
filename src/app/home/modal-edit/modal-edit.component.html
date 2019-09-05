@@ -1,0 +1,30 @@
+<div class="modal fade" #appModal appModalClose id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+	<div class="modal-content">
+	  <div class="modal-header">
+		<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		  <span aria-hidden="true">&times;</span>
+		</button>
+	  </div>
+		<form [formGroup]="formulario" (ngSubmit)="list ? atualizarDragoes() : cadastrarDragao()">
+		  <div class="modal-body">
+			<div class="row">
+				<div class="form-group col-md-6">
+					<input type="text" class="form-control" [value]="list ? list.name : ''" formControlName="name">
+					<label class="label-normal">Nome</label>	
+				</div>
+				<div class="form-group col-md-6">
+					<input type="text" class="form-control" [value]="list ? list.type : ''" formControlName="type">
+					<label class="label-normal">Tipo</label>
+				</div>					
+			</div>
+		  </div>
+		  <div class="modal-footer">
+			<button #closeModal type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+			<button type="submit"  class="btn btn-primary">Salvar dados para edição</button>
+		  </div>
+		</form>
+	</div>
+  </div>
+</div>

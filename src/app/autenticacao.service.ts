@@ -12,30 +12,18 @@ export class Autenticacao {
 	private msg: string;
 
 	constructor(private router: Router){
+		//Verificando se o idToken existe, caso exista ele entra na página home.
 		if(localStorage.getItem('idToken')){
 			this.router.navigate(['/home']);
 		}		
 	}
 
-	public cadastrarUsuario(usuario: Usuario): Promise<any> {
-		return firebase.auth().createUserWithEmailAndPassword(usuario.email, usuario.senha)
-		.then((resposta: any) => {
-			delete usuario.senha;
-			//btoa criptografa em bas64
-			//atob descriptografa em bas64
-
-			//firebase.auth().onAuthStateChanged((user) => {
-			//	if(user){
-					//firebase.database().ref(`usuario_detalhe/${btoa(usuario.email)}`)
-					//.set(usuario);
-					firebase.database().ref('usuarios').child(firebase.database().ref('usuarios').push().key).set(usuario);
-			//	}
-			//})
-		}).catch((error: Error) => {
-			console.error('Erro: '+error)
-			return error.message;
-		})
-	}
+	/*
+	* Metodo para autenticar o usuário
+	* A autenticação é feita pelo firebase e sua mensagem de erro em inglês é trocada por outra em portugues
+	* Após retornar sucesso é setado o idToken no atributo da classe e criado uma SessionStorage
+	* Após setar o token é feito um redirect para a rota Home
+	*/
 
 	public async autenticar(email: string, senha: string): Promise<string> {
 		await firebase.auth().signInWithEmailAndPassword(email, senha)
@@ -49,11 +37,17 @@ export class Autenticacao {
 		})
 		.catch((error: Error) => {
 			console.error('Erro: '+error);
-			this.msg = error.message;
+			// this.msg = this.mensagemErro(error.code);
 		})
 
 		return this.msg;
 	}
+
+	/*
+	* Metodo para verificar se o usuário está logado
+	* esse método adiciona o idToken na classe verificando se tem um item na SessionStorage que fica gravado no navegador
+	* Forçando para o usuário continuar logado
+	*/
 
 	public autenticado(): boolean {
 		if(this.token_id === undefined && localStorage.getItem('idToken') !== null){
@@ -67,12 +61,40 @@ export class Autenticacao {
 		return this.token_id !== undefined;
 	}
 
+	/*
+	* Metodo para fazer logout/logoff da tela inicial
+	* esse método remove o idToken da classe e da SessionStorage que fica gravado no browser
+	* Obs: foi comentado o redirecionamento da rota pois dependendo da versão do Angular ele já faz o redirect
+	*/
+
 	public sair(): void {
 		firebase.auth().signOut().then(() => {
 			localStorage.removeItem('idToken');
 			this.token_id = undefined;
 			//this.router.navigate(['/login']);
 		});
+	}
+
+	/*
+	* Metodo privado para mostrar uma mensagem de erro em português de acordo com seu código.
+	*/
+	private mensagemErro(codigo: string): string {
+		let msg: string = '';
+		switch (codigo) {
+			case "auth/user-not-found":
+				msg = 'Usuário não encontrado';
+				break;
+			
+			case "auth/wrong-password":
+				msg = 'Usuário ou senha invalida.';
+				break;
+
+			default:
+				msg = '';
+				break;
+		}
+
+		return msg;
 	}
 
 	
